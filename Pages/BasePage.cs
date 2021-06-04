@@ -3,7 +3,7 @@ using OpenQA.Selenium;
 
 namespace CheckFirst10TownsLocations.Pages
 {
-    public class Base
+    public class BasePage
     {
         protected readonly string google = "https://www.zip-codes.com/";
         protected static By Search = By.XPath("//a[@title = 'FREE ZIP Code Search']");
@@ -13,7 +13,7 @@ namespace CheckFirst10TownsLocations.Pages
 
         internal Wait Wait { get => wait; set => wait = value; }
 
-        public Base(IWebDriver driver)
+        public BasePage(IWebDriver driver)
         {
             this.driver = driver;
             Wait = new Wait(driver);

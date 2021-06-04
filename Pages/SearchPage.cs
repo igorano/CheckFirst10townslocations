@@ -3,13 +3,13 @@ using OpenQA.Selenium;
 
 namespace CheckFirst10TownsLocations.Pages
 {
-    public class Search : Base
+    public class SearchPage : BasePage
     {
         protected readonly By Advanced_Search = By.XPath("//h3[@id= 'ui-id-7']");
         protected readonly By Town = By.XPath("(//input[@name = 'fld-city' ])[last()]");
         protected readonly By Submit = By.XPath("(//input[@type= 'submit' and @value='Find ZIP Codes'])[last()]");
 
-        public Search(IWebDriver driver) : base(driver)
+        public SearchPage(IWebDriver driver) : base(driver)
         {
         }
 

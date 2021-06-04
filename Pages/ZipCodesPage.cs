@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CheckFirst10TownsLocations.Pages
 {
-    class ZipCodes : Base
+    class ZipCodesPage : BasePage
     {
         protected readonly By Latitude = By.XPath("(//tr[13]/td[2])[1]");
         protected readonly By Longitude = By.XPath("(//tr[14]/td[2])[1]");
@@ -15,7 +15,7 @@ namespace CheckFirst10TownsLocations.Pages
 
 
 
-        public ZipCodes(IWebDriver driver) : base(driver)
+        public ZipCodesPage(IWebDriver driver) : base(driver)
         {
         }
 

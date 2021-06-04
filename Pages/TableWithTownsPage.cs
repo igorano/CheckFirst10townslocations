@@ -5,11 +5,11 @@ using System.Text;
 
 namespace CheckFirst10TownsLocations.Pages
 {
-    class TableWithTowns : Base
+    class TableWithTownsPage : BasePage
     {
         protected readonly By FirstTown = By.XPath("//tbody/tr[2]/td[1]/a");
 
-        public TableWithTowns(IWebDriver driver) : base(driver)
+        public TableWithTownsPage(IWebDriver driver) : base(driver)
         {
         }
         public void ClickFirstTown() {
