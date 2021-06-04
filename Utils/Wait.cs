@@ -1,8 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CheckFirst10TownsLocations.Utils
 {
@@ -25,33 +23,20 @@ namespace CheckFirst10TownsLocations.Utils
                 Timeout = TimeSpan.FromSeconds(15)
             };
 
-        public IWebElement WaitForElementToBeClickable(By locator)
+        public void WaitForElementToBeClickable(By locator)
         {
-            var condition = SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(locator);
-
-            return WaitForExpectedCondition(condition);
+            SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(locator);
         }
 
-
-        private IWebElement WaitForExpectedCondition(Func<IWebDriver, IWebElement> condition)
+        public void WaitForElementToBeVisible(By locator)
         {
-            int attempts = 0;
-            while (true)
-            {
-                try
-                {
-                    return DefaultWait.Until(condition);
-                }
-                catch (Exception)
-                {
-                    if (attempts == 3)
-                    {
-                        throw;
-                    }
-
-                    attempts++;
-                }
-            }
+            SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(locator);
         }
+
+        public void WaitForExistingElement(By locator)
+        {
+            SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(locator);
+        }
+
     }
 }
