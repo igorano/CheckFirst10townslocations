@@ -36,10 +36,10 @@ namespace CheckFirst10TownsLocations
             search_page.ClickAdvancedSearch();
             search_page.PopulateTown("iva");
             search_page.ClickSubmit();
-            table.ClickFirstTown();
 
             for (int i=0; i < 10; i++)
             {
+                table.ClickFirstTown();
                 codes.GetLantitude();
                 codes.GetCityName();
                 codes.GetState();
