@@ -5,7 +5,7 @@ namespace CheckFirst10TownsLocations.Pages
 {
     public class Base
     {
-        private readonly string google = "https://www.zip-codes.com/";
+        protected readonly string google = "https://www.zip-codes.com/";
         protected static By Search = By.XPath("//a[@title = 'FREE ZIP Code Search']");
 
         public IWebDriver driver;

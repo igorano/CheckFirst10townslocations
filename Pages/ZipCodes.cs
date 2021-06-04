@@ -7,11 +7,11 @@ namespace CheckFirst10TownsLocations.Pages
 {
     class ZipCodes : Base
     {
-        private readonly By Latitude = By.XPath("(//tr[13]/td[2])[1]");
-        private readonly By Longitude = By.XPath("(//tr[14]/td[2])[1]");
-        private readonly By CityName = By.XPath("//tbody/tr[2]/td[2]/a");
-        private readonly By State = By.XPath("//table/tbody/tr[3]/td[2]/a");
-        private readonly By ZipCode = By.XPath("(//table/tbody/tr[1]/td[2])[2]");
+        protected readonly By Latitude = By.XPath("(//tr[13]/td[2])[1]");
+        protected readonly By Longitude = By.XPath("(//tr[14]/td[2])[1]");
+        protected readonly By CityName = By.XPath("//tbody/tr[2]/td[2]/a");
+        protected readonly By State = By.XPath("//table/tbody/tr[3]/td[2]/a");
+        protected readonly By ZipCode = By.XPath("(//table/tbody/tr[1]/td[2])[2]");
 
 
 
