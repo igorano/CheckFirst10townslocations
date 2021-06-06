@@ -1,4 +1,4 @@
-﻿// <copyright file="ZipCodesPage.cs" company="PlaceholderCompany">
+﻿// <copyright file="ZipCodesPage.cs" company="TestingCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 

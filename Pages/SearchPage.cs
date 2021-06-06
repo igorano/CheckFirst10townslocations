@@ -1,4 +1,4 @@
-﻿// <copyright file="SearchPage.cs" company="PlaceholderCompany">
+﻿// <copyright file="SearchPage.cs" company="TestingCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
