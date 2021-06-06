@@ -1,4 +1,8 @@
-﻿namespace CheckFirst10TownsLocations.Pages
+﻿// <copyright file="FirstPage.cs" company="TestingCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace CheckFirst10TownsLocations.Pages
 {
     using OpenQA.Selenium;
 
