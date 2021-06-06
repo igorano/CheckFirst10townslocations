@@ -16,6 +16,7 @@ namespace CheckFirst10TownsLocations
     {
         private IWebDriver driver;
         private BasePage basePage;
+        private FirstPage firstPage;
         private SearchPage searchPage;
         private ZipCodesPage codes;
 
@@ -31,10 +32,11 @@ namespace CheckFirst10TownsLocations
         public void GetFirst10Results()
         {
             this.basePage = new BasePage(this.driver);
+            this.firstPage = new FirstPage(this.driver);
             this.searchPage = new SearchPage(this.driver);
             this.codes = new ZipCodesPage(this.driver);
             this.basePage.GoToPage();
-            this.basePage.ClickSearch();
+            this.firstPage.ClickSearch();
             this.searchPage.ClickAdvancedSearch();
             this.searchPage.PopulateTown("iva");
             this.searchPage.ClickSubmit();

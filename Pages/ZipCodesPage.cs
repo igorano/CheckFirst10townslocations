@@ -17,6 +17,7 @@ namespace CheckFirst10TownsLocations.Pages
         private readonly By lonelyZipCode = By.XPath("(//td//a[starts-with(@title, 'ZIP Code')])[last()]");
         private readonly By confirm = By.XPath("//span[text() = 'Приемам']");
         private readonly By getCityName = By.XPath("(//td[preceding-sibling::td[contains(.,'City')]])[2]");
+        private readonly string searchedURL = "https://www.zip-codes.com/search.asp?fld-zip=&fld-city=iva&fld-state=&fld-county=&fld-areacode=&selectTab=3&Submit=Find+ZIP+Codes";
 
         public ZipCodesPage(IWebDriver driver)
             : base(driver)
@@ -100,7 +101,7 @@ namespace CheckFirst10TownsLocations.Pages
                 Screenshot ss = ((ITakesScreenshot)this.driver).GetScreenshot();
                 string screenshotName = city + "-" + state + "-" + zipCode + ".jpg";
                 ss.SaveAsFile(screenshotName, ScreenshotImageFormat.Png);
-                this.driver.Navigate().GoToUrl("https://www.zip-codes.com/search.asp?fld-zip=&fld-city=iva&fld-state=&fld-county=&fld-areacode=&selectTab=3&Submit=Find+ZIP+Codes");
+                this.driver.Navigate().GoToUrl(this.searchedURL);
             }
         }
     }
