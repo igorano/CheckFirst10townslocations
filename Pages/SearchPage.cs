@@ -26,9 +26,6 @@ namespace CheckFirst10TownsLocations.Pages
 
         public string PopulateTown(string name)
         {
-            Wait.WaitForExistingElement((By)this.town);
-            Wait.WaitForElementToBeVisible((By)this.town);
-            Wait.WaitForElementToBeClickable((By)this.town);
             Thread.Sleep(200);
             this.driver.FindElement(this.town).SendKeys(name);
             return name;
