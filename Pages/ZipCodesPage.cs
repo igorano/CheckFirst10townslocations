@@ -4,15 +4,19 @@
 
 namespace CheckFirst10TownsLocations.Pages
 {
+    using System;
     using OpenQA.Selenium;
 
     internal class ZipCodesPage : BasePage
     {
-        private readonly By latitude = By.XPath("(//tr[13]/td[2])[1]");
-        private readonly By longitude = By.XPath("(//tr[14]/td[2])[1]");
-        private readonly By cityName = By.XPath("//tbody/tr[2]/td[2]/a");
-        private readonly By state = By.XPath("//table/tbody/tr[3]/td[2]/a");
-        private readonly By zipCode = By.XPath("(//table/tbody/tr[1]/td[2])[2]");
+        private readonly By latitude = By.XPath("//td[preceding-sibling::td[contains(.,'Latitude')]]");
+        private readonly By longitude = By.XPath("//td[preceding-sibling::td[contains(.,'Longitude')]]");
+        private readonly string cityName = "(//a[contains(.,'IVA')])[{0}]";
+        private readonly By state = By.XPath("(//td[preceding-sibling::td[contains(.,'State')]])[2]");
+        private readonly By zipCode = By.XPath("(//td[preceding-sibling::td[contains(.,'Zip Code')]])[last()]");
+        private readonly By lonelyZipCode = By.XPath("(//td//a[starts-with(@title, 'ZIP Code')])[last()]");
+        private readonly By confirm = By.XPath("//span[text() = 'Приемам']");
+        private readonly By getCityName = By.XPath("(//td[preceding-sibling::td[contains(.,'City')]])[2]");
 
         public ZipCodesPage(IWebDriver driver)
             : base(driver)
@@ -33,11 +37,15 @@ namespace CheckFirst10TownsLocations.Pages
             return longitude;
         }
 
-        public string GetCityName()
+        public string GetCityWithXPath(string number)
         {
-            Utils.Wait.WaitForElementToBeClickable(this.cityName);
-            string cityName = this.driver.FindElement(this.cityName).Text;
-            return cityName;
+            return string.Format(this.cityName, number);
+        }
+
+        public void ClickCityName(string number)
+        {
+            Utils.Wait.WaitForElementToBeClickable(By.XPath(this.GetCityWithXPath(number).ToString()));
+            this.driver.FindElement(By.XPath(this.GetCityWithXPath(number).ToString())).Click();
         }
 
         public string GetState()
@@ -52,6 +60,48 @@ namespace CheckFirst10TownsLocations.Pages
             Utils.Wait.WaitForElementToBeClickable(this.zipCode);
             string zipCode = this.driver.FindElement(this.zipCode).Text;
             return zipCode;
+        }
+
+        public string GetCityName()
+        {
+            Utils.Wait.WaitForElementToBeClickable(this.getCityName);
+            return this.driver.FindElement(this.getCityName).Text;
+        }
+
+        public void ClickFirstRecord()
+        {
+            Utils.Wait.WaitForElementToBeClickable(this.lonelyZipCode);
+            this.driver.FindElement(this.lonelyZipCode).Click();
+        }
+
+        public void TakeScreenshots()
+        {
+            for (int i = 1; i < 11; i++)
+            {
+                this.ClickCityName(i.ToString());
+                this.ClickFirstRecord();
+                this.GetLantitude();
+                this.GetLongitude();
+                string state = this.GetState();
+                string zipCode = this.GetZipCode();
+                string city = this.GetCityName();
+                string url = "https://www.google.com/maps/search/?api=1&query=" + this.GetLantitude() + "," + this.GetLongitude();
+                this.driver.Navigate().GoToUrl(url);
+                try
+                {
+                    Utils.Wait.WaitForElementToBeVisible(this.confirm);
+                    this.driver.FindElement((By)this.confirm).Click();
+                }
+                catch (NoSuchElementException)
+                {
+                    Console.WriteLine("Confirm button is already clicked");
+                }
+
+                Screenshot ss = ((ITakesScreenshot)this.driver).GetScreenshot();
+                string screenshotName = city + "-" + state + "-" + zipCode + ".jpg";
+                ss.SaveAsFile(screenshotName, ScreenshotImageFormat.Png);
+                this.driver.Navigate().GoToUrl("https://www.zip-codes.com/search.asp?fld-zip=&fld-city=iva&fld-state=&fld-county=&fld-areacode=&selectTab=3&Submit=Find+ZIP+Codes");
+            }
         }
     }
 }
