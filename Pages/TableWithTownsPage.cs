@@ -1,20 +1,24 @@
-﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿// <copyright file="TableWithTownsPage.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace CheckFirst10TownsLocations.Pages
 {
-    class TableWithTownsPage : BasePage
-    {
-        protected readonly By FirstTown = By.XPath("//tbody/tr[2]/td[1]/a");
+    using OpenQA.Selenium;
 
-        public TableWithTownsPage(IWebDriver driver) : base(driver)
+    internal class TableWithTownsPage : BasePage
+    {
+        private readonly By firstTown = By.XPath("//tbody/tr[2]/td[1]/a");
+
+        public TableWithTownsPage(IWebDriver driver)
+            : base(driver)
         {
         }
-        public void ClickFirstTown() {
-            Wait.WaitForElementToBeClickable(FirstTown);
-            driver.FindElement(FirstTown).Click();
+
+        public void ClickFirstTown()
+        {
+            Utils.Wait.WaitForElementToBeClickable(this.firstTown);
+            this.driver.FindElement(this.firstTown).Click();
         }
     }
 }

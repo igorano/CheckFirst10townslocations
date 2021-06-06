@@ -1,32 +1,35 @@
-﻿using CheckFirst10TownsLocations.Utils;
-using OpenQA.Selenium;
+﻿// <copyright file="BasePage.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace CheckFirst10TownsLocations.Pages
 {
+    using CheckFirst10TownsLocations.Utils;
+    using OpenQA.Selenium;
+
     public class BasePage
     {
-        protected readonly string google = "https://www.zip-codes.com/";
-        protected static By Search = By.XPath("//a[@title = 'FREE ZIP Code Search']");
+        private readonly string google = "https://www.zip-codes.com/";
+        private readonly By search = By.XPath("//a[@title = 'FREE ZIP Code Search']");
 
-        public IWebDriver driver;
-        private Wait wait;
-
-        internal Wait Wait { get => wait; set => wait = value; }
+        public readonly IWebDriver driver;
+        private readonly Wait wait;
 
         public BasePage(IWebDriver driver)
+#pragma warning restore SA1614 // Element parameter documentation should have text
         {
             this.driver = driver;
-            Wait = new Wait(driver);
+            this.wait = new Wait(driver);
         }
 
         public void GoToPage()
         {
-            driver.Navigate().GoToUrl(google);
+            this.driver.Navigate().GoToUrl(this.google);
         }
 
         public void ClickSearch()
         {
-            driver.FindElement((By)Search).Click();
+            this.driver.FindElement((By)this.search).Click();
         }
     }
 }

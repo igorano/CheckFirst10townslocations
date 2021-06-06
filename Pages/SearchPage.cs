@@ -1,35 +1,39 @@
-﻿using CheckFirst10TownsLocations.Utils;
-using OpenQA.Selenium;
+﻿// <copyright file="SearchPage.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace CheckFirst10TownsLocations.Pages
 {
+    using CheckFirst10TownsLocations.Utils;
+    using OpenQA.Selenium;
+
     public class SearchPage : BasePage
     {
-        protected readonly By Advanced_Search = By.XPath("//h3[@id= 'ui-id-7']");
-        protected readonly By Town = By.XPath("(//input[@name = 'fld-city' ])[last()]");
-        protected readonly By Submit = By.XPath("(//input[@type= 'submit' and @value='Find ZIP Codes'])[last()]");
+        private readonly By advancedSearch = By.XPath("//h3[@id= 'ui-id-7']");
+        private readonly By town = By.XPath("(//input[@name = 'fld-city' ])[last()]");
+        private readonly By submit = By.XPath("(//input[@type= 'submit' and @value='Find ZIP Codes'])[last()]");
 
-        public SearchPage(IWebDriver driver) : base(driver)
+        public SearchPage(IWebDriver driver)
+            : base(driver)
         {
         }
 
         public void ClickAdvancedSearch()
         {
-            driver.FindElement(Advanced_Search).Click();
+            this.driver.FindElement(this.advancedSearch).Click();
         }
 
         public string PopulateTown(string name)
         {
-            Wait.WaitForElementToBeClickable((By)Town);
-            driver.FindElement(Town).SendKeys(name);
+            Wait.WaitForElementToBeClickable((By)this.town);
+            this.driver.FindElement(this.town).SendKeys(name);
             return name;
         }
 
         public void ClickSubmit()
         {
-            Wait.WaitForElementToBeClickable(Submit);
-            driver.FindElement((By)Submit).Click();
+            Wait.WaitForElementToBeClickable(this.submit);
+            this.driver.FindElement((By)this.submit).Click();
         }
     }
 }
-

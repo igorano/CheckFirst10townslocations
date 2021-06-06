@@ -1,56 +1,57 @@
-﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿// <copyright file="ZipCodesPage.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace CheckFirst10TownsLocations.Pages
 {
-    class ZipCodesPage : BasePage
+    using OpenQA.Selenium;
+
+    internal class ZipCodesPage : BasePage
     {
-        protected readonly By Latitude = By.XPath("(//tr[13]/td[2])[1]");
-        protected readonly By Longitude = By.XPath("(//tr[14]/td[2])[1]");
-        protected readonly By CityName = By.XPath("//tbody/tr[2]/td[2]/a");
-        protected readonly By State = By.XPath("//table/tbody/tr[3]/td[2]/a");
-        protected readonly By ZipCode = By.XPath("(//table/tbody/tr[1]/td[2])[2]");
+        private readonly By latitude = By.XPath("(//tr[13]/td[2])[1]");
+        private readonly By longitude = By.XPath("(//tr[14]/td[2])[1]");
+        private readonly By cityName = By.XPath("//tbody/tr[2]/td[2]/a");
+        private readonly By state = By.XPath("//table/tbody/tr[3]/td[2]/a");
+        private readonly By zipCode = By.XPath("(//table/tbody/tr[1]/td[2])[2]");
 
-
-
-        public ZipCodesPage(IWebDriver driver) : base(driver)
+        public ZipCodesPage(IWebDriver driver)
+            : base(driver)
         {
         }
 
-        public string GetLantitude() 
+        public string GetLantitude()
         {
-            Wait.WaitForElementToBeClickable(Latitude);
-            string latitude = driver.FindElement(Latitude).Text;
+            Utils.Wait.WaitForElementToBeClickable(this.latitude);
+            string latitude = this.driver.FindElement(this.latitude).Text;
             return latitude;
         }
 
         public string GetLongitude()
         {
-            Wait.WaitForElementToBeClickable(Longitude);
-            string longitude = driver.FindElement(Longitude).Text;
+            Utils.Wait.WaitForElementToBeClickable(this.longitude);
+            string longitude = this.driver.FindElement(this.longitude).Text;
             return longitude;
         }
 
         public string GetCityName()
         {
-            Wait.WaitForElementToBeClickable(CityName);
-            string cityName = driver.FindElement(CityName).Text;
+            Utils.Wait.WaitForElementToBeClickable(this.cityName);
+            string cityName = this.driver.FindElement(this.cityName).Text;
             return cityName;
         }
+
         public string GetState()
         {
-            Wait.WaitForElementToBeClickable(State);
-            string state = driver.FindElement(State).Text;
+            Utils.Wait.WaitForElementToBeClickable(this.state);
+            string state = this.driver.FindElement(this.state).Text;
             return state;
         }
+
         public string GetZipCode()
         {
-            Wait.WaitForElementToBeClickable(ZipCode);
-            string zipCode = driver.FindElement(ZipCode).Text;
+            Utils.Wait.WaitForElementToBeClickable(this.zipCode);
+            string zipCode = this.driver.FindElement(this.zipCode).Text;
             return zipCode;
         }
-
     }
 }

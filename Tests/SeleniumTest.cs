@@ -10,53 +10,53 @@ namespace CheckFirst10TownsLocations
 
     public class SeleniumTest
     {
-        public IWebDriver Driver;
-        BasePage basePage;
-        SearchPage search_page;
-        TableWithTownsPage table;
-        ZipCodesPage codes; 
+        private IWebDriver driver;
+        private BasePage basePage;
+        private SearchPage searchPage;
+        private TableWithTownsPage table;
+        private ZipCodesPage codes;
 
         [SetUp]
         public void Init()
         {
             new DriverManager().SetUpDriver(new ChromeConfig(), VersionResolveStrategy.MatchingBrowser);
-            Driver = new ChromeDriver();
+            this.driver = new ChromeDriver();
         }
 
         [Test]
         public void GetFirst10Results()
         {
-            basePage = new BasePage(Driver);
-            search_page = new SearchPage(Driver);
-            table = new TableWithTownsPage(Driver);
-            codes = new ZipCodesPage(Driver);
-            base_page.GoToPage();
-            base_page.ClickSearch();
-            search_page.ClickAdvancedSearch();
-            search_page.PopulateTown("iva");
-            search_page.ClickSubmit();
-            table.ClickFirstTown();
+            this.basePage = new BasePage(this.driver);
+            this.searchPage = new SearchPage(this.driver);
+            this.table = new TableWithTownsPage(this.driver);
+            this.codes = new ZipCodesPage(this.driver);
+            this.basePage.GoToPage();
+            this.basePage.ClickSearch();
+            this.searchPage.ClickAdvancedSearch();
+            this.searchPage.PopulateTown("iva");
+            this.searchPage.ClickSubmit();
+            this.table.ClickFirstTown();
 
-            for (int i=0; i < 10; i++)
+            for (int i = 0; i < 10; i++)
             {
-                codes.GetLantitude();
-                codes.GetCityName();
-                codes.GetState();
-                codes.GetZipCode();
-                codes.GetLongitude();
-                string url = "https://www.google.com/maps/search/?api=1&query=" + codes.GetLantitude() + "," + codes.GetLongitude();
-                Driver.Navigate().GoToUrl(url);
-                Screenshot ss = ((ITakesScreenshot)Driver).GetScreenshot();
-                string screenshotName = "<" + codes.GetCityName() + ">-<" + codes.GetState() + ">-<" + codes.GetZipCode() + ">.jpg";
+                this.codes.GetLantitude();
+                this.codes.GetCityName();
+                this.codes.GetState();
+                this.codes.GetZipCode();
+                this.codes.GetLongitude();
+                string url = "https://www.google.com/maps/search/?api=1&query=" + this.codes.GetLantitude() + "," + this.codes.GetLongitude();
+                this.driver.Navigate().GoToUrl(url);
+                Screenshot ss = ((ITakesScreenshot)this.driver).GetScreenshot();
+                string screenshotName = "<" + this.codes.GetCityName() + ">-<" + this.codes.GetState() + ">-<" + this.codes.GetZipCode() + ">.jpg";
                 ss.SaveAsFile(screenshotName, ScreenshotImageFormat.Jpeg);
-                Driver.Navigate().Back();
+                this.driver.Navigate().Back();
             }
         }
 
         [TearDown]
         public void Cleanup()
         {
-            Driver.Quit();
+            this.driver.Quit();
         }
     }
 }

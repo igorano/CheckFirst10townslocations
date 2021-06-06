@@ -1,42 +1,42 @@
-﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
-using System;
+﻿// <copyright file="Wait.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace CheckFirst10TownsLocations.Utils
 {
-    class Wait
+    using System;
+    using OpenQA.Selenium;
+    using OpenQA.Selenium.Support.UI;
+
+    internal class Wait
     {
         private readonly IWebDriver driver;
 
-        // Wait 
-        public const int WAIT_DELAY = 15;
-        public const int POLLING_INTERVAL = 433;
+        private readonly int waitDelay = 15;
+        private readonly int pollingInterval = 433;
+
         public Wait(IWebDriver webDriver)
         {
-            driver = webDriver;
+            this.driver = webDriver;
         }
 
         public WebDriverWait DefaultWait =>
-            new WebDriverWait(driver, TimeSpan.FromSeconds(WAIT_DELAY))
+            new WebDriverWait(this.driver, TimeSpan.FromSeconds(this.waitDelay))
             {
-                PollingInterval = TimeSpan.FromMilliseconds(POLLING_INTERVAL),
-                Timeout = TimeSpan.FromSeconds(15)
+                PollingInterval = TimeSpan.FromMilliseconds(this.pollingInterval),
+                Timeout = TimeSpan.FromSeconds(15),
             };
 
-        public void WaitForElementToBeClickable(By locator)
+        public static void WaitForElementToBeClickable(By locator)
         {
             SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(locator);
         }
 
-        public void WaitForElementToBeVisible(By locator)
-        {
-            SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(locator);
-        }
+        public static void WaitForElementToBeVisible(By locator) => SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(locator);
 
-        public void WaitForExistingElement(By locator)
+        public static void WaitForExistingElement(By locator)
         {
             SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(locator);
         }
-
     }
 }
