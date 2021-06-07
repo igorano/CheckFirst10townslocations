@@ -27,16 +27,19 @@ namespace CheckFirst10TownsLocations.Utils
                 Timeout = TimeSpan.FromSeconds(15),
             };
 
-        public static void WaitForElementToBeClickable(By locator)
+        public void WaitForElementToBeClickable(By locator)
         {
-            SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(locator);
+            this.DefaultWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(locator));
         }
 
-        public static void WaitForElementToBeVisible(By locator) => SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(locator);
-
-        public static void WaitForExistingElement(By locator)
+        public void WaitForElementToBeVisible(By locator)
         {
-            SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(locator);
+            this.DefaultWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(locator));
+        }
+
+        public void WaitForExistingElement(By locator)
+        {
+            this.DefaultWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(locator));
         }
     }
 }

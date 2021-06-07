@@ -5,10 +5,13 @@
 namespace CheckFirst10TownsLocations.Pages
 {
     using System;
+    using CheckFirst10TownsLocations.Utils;
     using OpenQA.Selenium;
 
     internal class ZipCodesPage : BasePage
     {
+        private readonly Wait wait;
+
         private readonly By latitude = By.XPath("//td[preceding-sibling::td[contains(.,'Latitude')]]");
         private readonly By longitude = By.XPath("//td[preceding-sibling::td[contains(.,'Longitude')]]");
         private readonly string cityName = "(//a[contains(.,'IVA')])[{0}]";
@@ -22,18 +25,19 @@ namespace CheckFirst10TownsLocations.Pages
         public ZipCodesPage(IWebDriver driver)
             : base(driver)
         {
+            this.wait = new Wait(driver);
         }
 
         public string GetLantitude()
         {
-            Utils.Wait.WaitForElementToBeClickable(this.latitude);
+            this.wait.WaitForElementToBeClickable(this.latitude);
             string latitude = this.driver.FindElement(this.latitude).Text;
             return latitude;
         }
 
         public string GetLongitude()
         {
-            Utils.Wait.WaitForElementToBeClickable(this.longitude);
+            this.wait.WaitForElementToBeClickable(this.longitude);
             string longitude = this.driver.FindElement(this.longitude).Text;
             return longitude;
         }
@@ -45,33 +49,33 @@ namespace CheckFirst10TownsLocations.Pages
 
         public void ClickCityName(string number)
         {
-            Utils.Wait.WaitForElementToBeClickable(By.XPath(this.GetCityWithXPath(number).ToString()));
+            this.wait.WaitForElementToBeClickable(By.XPath(this.GetCityWithXPath(number).ToString()));
             this.driver.FindElement(By.XPath(this.GetCityWithXPath(number).ToString())).Click();
         }
 
         public string GetState()
         {
-            Utils.Wait.WaitForElementToBeClickable(this.state);
+            this.wait.WaitForElementToBeClickable(this.state);
             string state = this.driver.FindElement(this.state).Text;
             return state;
         }
 
         public string GetZipCode()
         {
-            Utils.Wait.WaitForElementToBeClickable(this.zipCode);
+            this.wait.WaitForElementToBeClickable(this.zipCode);
             string zipCode = this.driver.FindElement(this.zipCode).Text;
             return zipCode;
         }
 
         public string GetCityName()
         {
-            Utils.Wait.WaitForElementToBeClickable(this.getCityName);
+            this.wait.WaitForElementToBeClickable(this.getCityName);
             return this.driver.FindElement(this.getCityName).Text;
         }
 
         public void ClickFirstRecord()
         {
-            Utils.Wait.WaitForElementToBeClickable(this.lonelyZipCode);
+            this.wait.WaitForElementToBeClickable(this.lonelyZipCode);
             this.driver.FindElement(this.lonelyZipCode).Click();
         }
 
@@ -90,7 +94,6 @@ namespace CheckFirst10TownsLocations.Pages
                 this.driver.Navigate().GoToUrl(url);
                 try
                 {
-                    Utils.Wait.WaitForElementToBeVisible(this.confirm);
                     this.driver.FindElement((By)this.confirm).Click();
                 }
                 catch (NoSuchElementException)
